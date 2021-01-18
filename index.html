@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Portfolio</title>
+    <style>
+        .main{
+        text-align:center;
+        }
+    </style>
+</head>
+<body>
+<div id="loading">
+    loading..
+</div>
+<div class="main" id="mainContainer" hidden>
+    <img
+        height="100"
+        width="100"
+        id="profileImage">
+    <h2 id="fullName"></h2>
+    <p id="bio"></p>
+    <h2>My Projects</h2>
+    <p>
+        Check my projects repositories linkgi <a id="projectRepoLink">Repositories</a>
+    </p>
+</div>
+
+<script>
+    fetch("https://api.github.com/users/Pekka123")
+        .then(respose=>respose.json())
+            .then(function (data){
+                console.log(data)
+                document.getElementById('profileImage').src=data['avatar_url']
+                document.getElementById('fullName').textContent=data['name']
+                document.getElementById('bio').textContent=data['bio']
+                document.getElementById('projectRepoLink').href=data['repos_url']
+
+
+                document.getElementById('mainContainer').hidden=false
+                document.getElementById('loading').hidden=true
+            })
+    </script>
+
+
+</body>
+</html>
